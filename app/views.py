@@ -27,9 +27,10 @@ def index(request):
 def position(request):
 	lon= request.GET.get("long")
 	lat= request.GET.get("lat")
+	device = request.GET.get("device")
 	print(lon, lat)
 
-	url = 'https://hanwco8wl6.execute-api.ap-south-1.amazonaws.com/farmbuddy/?device=12&long='+lon+'&lat='+lat
+	url = 'https://hanwco8wl6.execute-api.ap-south-1.amazonaws.com/farmbuddy/?device='+device+'&long='+lon+'&lat='+lat
 	r = requests.get(url)
 	print(r.content)
 
