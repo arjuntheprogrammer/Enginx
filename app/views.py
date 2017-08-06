@@ -11,13 +11,25 @@ from django.http import JsonResponse
 def index(request):
 	ec= request.GET.get("ec")
 	ph= request.GET.get("ph")
+	device = request.GET.get("device")
 	moisture= request.GET.get("moisture")
-	print(ec, ph, moisture)
+	print(ec, ph, moisture, device)
 
 	# headers = {'content-type': 'application/json'}
 	# data = {}
 	# params = {'sessionKey': '9ebbd0b25760557393a43064a92bae539d962103', 'format': 'xml', 'platformId': 1}
-	url = 'https://wovkld4mh8.execute-api.ap-south-1.amazonaws.com/vinayak?ec='+ec+'&ph='+ph+'&moisture='+moisture
+	url = 'https://wovkld4mh8.execute-api.ap-south-1.amazonaws.com/farmbuddy/?ec='+ec+'&ph='+ph+'&moisture='+moisture+'&device='+device
+	r = requests.get(url)
+	print(r.content)
+
+	return JsonResponse({"data": str(r.content)})
+
+def position(request):
+	lon= request.GET.get("long")
+	lat= request.GET.get("lat")
+	print(lon, lat)
+
+	url = 'https://hanwco8wl6.execute-api.ap-south-1.amazonaws.com/farmbuddy/?device=12&long='+lon+'&lat='+lat
 	r = requests.get(url)
 	print(r.content)
 
