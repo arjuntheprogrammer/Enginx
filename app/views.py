@@ -35,3 +35,19 @@ def position(request):
 	print(r.content)
 
 	return JsonResponse({"data": str(r.content)})
+
+
+def position2(request):
+	lon= request.GET.get("long")
+	lat= request.GET.get("lat")
+	ph = request.GET.get("ph")
+	date = request.GET.get("date")
+	# print(lon, lat)
+
+	url = 'https://hq3705ecre.execute-api.ap-south-1.amazonaws.com/farmbuddy/?lat='+lat+'&long='+lon+'&ph='+ph+'&date='+date
+
+	# url = 'https://hanwco8wl6.execute-api.ap-south-1.amazonaws.com/farmbuddy/?device='+device+'&long='+lon+'&lat='+lat
+	r = requests.get(url)
+	print(r.content)
+
+	return JsonResponse({"data": str(r.content)})
